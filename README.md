@@ -33,11 +33,6 @@ To fetch all posts with detailed content and save as JSON files:
 npm run get
 ```
 
-If the process times out or fails partway through, resume from a specific index:
-
-```bash
-npm run get -- 150
-```
 
 1. Generate HTML & MD from JSON
 

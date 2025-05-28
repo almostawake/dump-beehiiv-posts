@@ -33,19 +33,14 @@ export async function getAllPosts(): Promise<BeehiivPost[]> {
   return allPosts;
 }
 
-export async function enrichPostsWithContent(posts: BeehiivPost[], startIndex: number = 0): Promise<BeehiivPost[]> {
+export async function enrichPostsWithContent(posts: BeehiivPost[]): Promise<BeehiivPost[]> {
   const enrichedPosts: BeehiivPost[] = [];
   
   // Make sure the posts directory exists
   await fs.mkdir(POSTS_DIR, { recursive: true });
   
-  // Check if we're starting from the beginning or resuming
-  if (startIndex > 0) {
-    console.log(`Resuming from post ${startIndex + 1}/${posts.length}`);
-  }
-  
   // Fetch detailed content for each post
-  for (let i = startIndex; i < posts.length; i++) {
+  for (let i = 0; i < posts.length; i++) {
     const post = posts[i];
     console.log(`Fetching detailed content for post ${i + 1}/${posts.length}: ${post.slug}`);
     
