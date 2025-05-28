@@ -4,9 +4,9 @@
   "description": "Command-line utility for managing Beehiiv posts",
   "main": "index.js",
   "scripts": {
-    "get": "tsx get-all-content.ts",
+    "get": "tsx cmd-get-all-content.ts",
     "lst": "tsx list-posts.ts",
-    "gen": "tsx generate-all-markdown.ts"
+    "gen": "tsx cmd-generate-all-markdown.ts"
   },
   "keywords": [
     "beehiiv",
