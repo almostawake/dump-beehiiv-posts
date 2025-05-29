@@ -2,7 +2,6 @@ import { JSDOM } from "jsdom";
 import { removeUnwantedText } from "./fn-preprocess-html-remove-unwanted-text.js";
 import { removeCommentButton } from "./fn-preprocess-html-remove-comment-button.js";
 import { removeSocials } from "./fn-preprocess-html-remove-socials.js";
-import { cleanHeadings } from "./fn-preprocess-html-clean-headings.js";
 import { removeBeehiivFooter } from "./fn-preprocess-html-remove-beehiiv-footer.js";
 
 /**
@@ -24,9 +23,6 @@ export function preprocessHtml(htmlContent: string): string {
 
   // Remove Comment button and everything from that point down
   removeCommentButton(document);
-
-  // Clean up headings to remove all formatting
-  //cleanHeadings(document);
 
   return document.body.innerHTML;
 }
