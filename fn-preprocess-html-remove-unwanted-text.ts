@@ -9,8 +9,7 @@ export function removeUnwantedText(document: Document, NodeFilter: any): void {
     'Andrew Walker',
     'OPEN_TRACKING_PIXEL',
     'Did someone forward this email to you?',
-    'Back issues available',
-    '228 Park Ave'
+    'Back issues available'
   ];
   
   textsToRemove.forEach(text => {
@@ -28,18 +27,10 @@ export function removeUnwantedText(document: Document, NodeFilter: any): void {
         // Find the appropriate container element to remove
         let elementToRemove: Element | null = null;
         
-        // For "228 Park Ave", remove the entire table
-        if (text === '228 Park Ave') {
-          elementToRemove = node.parentElement;
-          while (elementToRemove && elementToRemove.tagName !== 'TABLE') {
-            elementToRemove = elementToRemove.parentElement;
-          }
-        } else {
-          // For other texts, remove the tr element
-          elementToRemove = node.parentElement;
-          while (elementToRemove && elementToRemove.tagName !== 'TR') {
-            elementToRemove = elementToRemove.parentElement;
-          }
+        // Remove the tr element
+        elementToRemove = node.parentElement;
+        while (elementToRemove && elementToRemove.tagName !== 'TR') {
+          elementToRemove = elementToRemove.parentElement;
         }
         
         if (elementToRemove) {

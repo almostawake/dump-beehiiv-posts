@@ -57,10 +57,7 @@ export async function convertPostToMarkdown(postFile: string, postsDir: string, 
       return;
     }
     
-    // Preprocess HTML to remove unwanted content
-    htmlContent = preprocessHtml(htmlContent);
-    
-    // Save the preprocessed HTML content
+    // Save the original HTML content
     const baseFileName = post.data.slug;
     const htmlFileName = `${baseFileName}.html`;
     const htmlPath = path.join(markdownDir, htmlFileName);
@@ -71,8 +68,11 @@ export async function convertPostToMarkdown(postFile: string, postsDir: string, 
     // Get and format the publish date
     const publishDate = post.data.publish_date ? new Date(post.data.publish_date * 1000).toISOString().split('T')[0] : '';
     
-    // Save the preprocessed HTML content
+    // Save the original HTML content (before preprocessing)
     await fs.writeFile(htmlPath, htmlContent, 'utf-8');
+    
+    // Now preprocess HTML for markdown conversion
+    htmlContent = preprocessHtml(htmlContent);
     console.log(`Saved preprocessed HTML: ${htmlFileName}`);
     
     // Clean up the HTML content before conversion
