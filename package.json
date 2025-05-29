@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "get": "tsx cmd-get-all-content.ts",
-    "lst": "tsx list-posts.ts",
+    "listposts": "tsx cmd-list-posts.ts",
+    "listpubs": "tsx cmd-list-publications.ts",
     "gen": "tsx cmd-generate-all-markdown.ts"
   },
   "keywords": [
