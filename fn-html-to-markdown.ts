@@ -7,17 +7,17 @@ import fs from 'fs/promises';
  * @param options Optional turndown configuration options
  * @returns Markdown content as string
  */
-export function htmlToMarkdown(html: string, options: any = {}): string {
+export function htmlToMarkdown(html: string, options: Record<string, any> = {}): string {
   // Set up the turndown service with default options
-  const defaultOptions = {
-    headingStyle: 'atx',         // Use # style headings
+  const defaultOptions: TurndownService.Options = {
+    headingStyle: 'atx' as const,         // Use # style headings
     hr: '---',                   // Horizontal rules use ---
     bulletListMarker: '-',       // Use - for bullet points
-    codeBlockStyle: 'fenced',    // Use ``` for code blocks
+    codeBlockStyle: 'fenced' as const,    // Use ``` for code blocks
     fence: '```',                // Fence character
     emDelimiter: '*',            // Use * for emphasis
     strongDelimiter: '**',       // Use ** for strong emphasis
-    linkStyle: 'inlined',        // Use inline links
+    linkStyle: 'inlined' as const,        // Use inline links
   };
 
   // Merge default options with any provided options
@@ -31,7 +31,7 @@ export function htmlToMarkdown(html: string, options: any = {}): string {
   // Rule to handle images with proper alt text
   turndownService.addRule('images', {
     filter: 'img',
-    replacement: function (content, node) {
+    replacement: function (content: string, node: any) {
       const alt = node.getAttribute('alt') || '';
       const src = node.getAttribute('src') || '';
       const title = node.getAttribute('title') || '';
@@ -44,10 +44,10 @@ export function htmlToMarkdown(html: string, options: any = {}): string {
   
   // Rule to improve handling of links
   turndownService.addRule('links', {
-    filter: function (node) {
-      return node.nodeName === 'A' && node.getAttribute('href');
+    filter: function (node: any): boolean {
+      return node.nodeName === 'A' && !!node.getAttribute('href');
     },
-    replacement: function (content, node) {
+    replacement: function (content: string, node: any) {
       const href = node.getAttribute('href') || '';
       const title = node.getAttribute('title') || '';
       
@@ -70,7 +70,7 @@ export function htmlToMarkdown(html: string, options: any = {}): string {
  * @param options Optional turndown configuration options
  * @returns Markdown content as string
  */
-export async function fileHtmlToMarkdown(htmlFilePath: string, options: any = {}): Promise<string> {
+export async function fileHtmlToMarkdown(htmlFilePath: string, options: Record<string, any> = {}): Promise<string> {
   try {
     // Read the HTML file
     const html = await fs.readFile(htmlFilePath, 'utf-8');

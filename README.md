@@ -10,11 +10,13 @@ A typeScript utility for:
   - Stores them in the "posts" folder, one file per post, the JSON includes embedded html
   - If a file exists already, it doesn't grab the HTML again or overwrite the file
   - Delete JSON files (individual or all) if you want them re-fetched
-- **Generating HTML and MD** from the previously grabbed JSON files
-  - Regenerates all HTML/MD from existing JSON files (only) each run
-  - The HTML is left as-is
+- **Generating HTML, MD, CSV, JSON** from the previously grabbed JSON files
+  - Regenerates all HTML/MD/CSV/JSON files from existing JSON files (only) each run
+  - The HTML is left as-is from the original JSON content (one file per post)
   - MD generation pre-processes HTML to remove stuff that wasn't part of the actual post, like socials, the Beehiiv footer, author information. Some of these are specific to my content e.g. it looks for my name and removes everything around it. I've tried to keep it modular so you can make changes with the help of an LLM without being a coder (I built this with Claude Code doing the heavy lifting).
-  - At the top, the MD includes publication date in ISO format (e.g. 2025-05-28) and post URL so LLMs can use that information in structured form.
+  - MD output is one file per post
+  - At the top, the MD files include publication date in ISO format (e.g. 2025-05-28), title and post URL so LLMs can use that information in structured form.
+  - Then a single CSV and a single JSON file are produced using the MD content, plus url, name and date of publication
 
 Files are named using the post slug for easy identification.
 

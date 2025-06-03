@@ -1,15 +1,21 @@
 import fs from 'fs/promises';
 import path from 'path';
 import { BeehiivPost } from './types.js';
-import { recordsToCsv, CsvRecord } from './fn-records-to-csv.js';
+
+export interface JsonRecord {
+  title: string;
+  url: string;
+  date: string;
+  markdown: string;
+}
 
 /**
- * Generates CSV content from all posts in the posts directory
+ * Generates JSON content from all posts in the posts directory
  */
-export async function generateCsv(postsDir: string, markdownDir: string): Promise<string> {
+export async function generateJson(postsDir: string, markdownDir: string): Promise<JsonRecord[]> {
   const files = await fs.readdir(postsDir);
   const jsonFiles = files.filter(file => file.endsWith('.json'));
-  const records: CsvRecord[] = [];
+  const records: JsonRecord[] = [];
   
   for (const file of jsonFiles) {
     const postPath = path.join(postsDir, file);
@@ -55,5 +61,5 @@ export async function generateCsv(postsDir: string, markdownDir: string): Promis
   // Sort by date (newest first)
   records.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   
-  return recordsToCsv(records);
+  return records;
 }

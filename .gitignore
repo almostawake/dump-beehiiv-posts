@@ -1,5 +1,6 @@
 # Input/Output files
-*.csv
+all-posts.csv
+all-posts.json
 
 
 # Dependencies

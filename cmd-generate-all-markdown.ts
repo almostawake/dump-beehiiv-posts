@@ -1,6 +1,8 @@
 import { convertPostToMarkdown } from './fn-convert-post-to-markdown.js';
-import { generateCsv } from './fn-generate-csv.js';
 import { saveCsv } from './fn-save-csv.js';
+import { generateJson } from './fn-generate-json.js';
+import { saveJson } from './fn-save-json.js';
+import { recordsToCsv } from './fn-records-to-csv.js';
 import fs from 'fs/promises';
 
 // Directories
@@ -35,9 +37,16 @@ async function main() {
     console.log(`\nCompleted processing ${jsonFiles.length} posts.`);
     console.log(`Markdown files have been saved to the '${MARKDOWN_DIR}' directory.`);
     
-    // Generate CSV file
-    console.log('\nGenerating CSV file...');
-    const csvContent = await generateCsv(POSTS_DIR, MARKDOWN_DIR);
+    // Generate both CSV and JSON files from the same data
+    console.log('\nGenerating CSV and JSON files...');
+    const jsonRecords = await generateJson(POSTS_DIR, MARKDOWN_DIR);
+    
+    // Save JSON file
+    await saveJson(jsonRecords, 'all-posts.json');
+    console.log('JSON file saved as all-posts.json');
+    
+    // Convert to CSV and save
+    const csvContent = recordsToCsv(jsonRecords);
     await saveCsv(csvContent, 'all-posts.csv');
     console.log('CSV file saved as all-posts.csv');
   } catch (error) {
