@@ -1,3 +1,7 @@
+# Input/Output files
+*.csv
+
+
 # Dependencies
 node_modules/
 
