@@ -93,7 +93,7 @@ export async function convertPostToMarkdown(
 
     // Prepare final markdown with date and URL at top
     let finalMarkdown = "";
-    finalMarkdown += `Title: ${post.data.title}\n\n`;
+    finalMarkdown += `# ${post.data.title}\n\n`;
     if (publishDate) {
       finalMarkdown += `Date Published: ${publishDate}\n\n`;
     }

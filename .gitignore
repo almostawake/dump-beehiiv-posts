@@ -1,7 +1,5 @@
 # Input/Output files
-all-posts.csv
-all-posts.json
-
+all-posts.*
 
 # Dependencies
 node_modules/
